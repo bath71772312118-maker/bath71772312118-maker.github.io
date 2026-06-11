@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bathra Galish S — Mechanical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E33;
+    --navy-2:#11304F;
+    --paper:#F1EEE6;
+    --paper-line:#D8D2C2;
+    --ink:#1B2430;
+    --orange:#E8743B;
+    --cyan:#4DB8E0;
+    --green:#5FAE6E;
+    --red:#D9534F;
+    --muted:#7C8A9C;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  a{color:inherit;}
+
+  /* ===== Drafting grid background ===== */
+  .grid-bg{
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:40px 40px;
+  }
+
+  /* ===== Nav ===== */
+  nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(241,238,230,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--paper-line);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 6vw;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-weight:700; font-size:0.95rem;
+    letter-spacing:0.08em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .nav-mark .dot{width:10px;height:10px;background:var(--orange);border-radius:50%;display:inline-block;}
+  .nav-links{display:flex; gap:28px; font-size:0.85rem; font-family:var(--mono); letter-spacing:0.04em;}
+  .nav-links a{text-decoration:none; color:var(--ink); position:relative; padding-bottom:4px; opacity:0.75;}
+  .nav-links a:hover{opacity:1;}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--orange);
+    transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* ===== Hero ===== */
+  .hero{
+    background:var(--navy);
+    color:#EAF1F8;
+    padding:8vw 6vw 6vw;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--orange);
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:1; max-width:1200px; margin:0 auto;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.8rem; letter-spacing:0.25em;
+    color:var(--cyan); text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .eyebrow::after{content:''; flex:1; height:1px; background:rgba(255,255,255,0.15); max-width:200px;}
+  h1.name{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    line-height:1.02; letter-spacing:-0.02em;
+    margin-bottom:18px;
+  }
+  h1.name .last{color:var(--orange);}
+  .hero-sub{
+    font-size:clamp(1rem, 2vw, 1.3rem);
+    color:#B9C8D8; max-width:640px; margin-bottom:36px;
+    font-weight:400;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:14px;
+    font-family:var(--mono); font-size:0.8rem;
+  }
+  .chip{
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:999px; padding:8px 18px;
+    color:#CBD8E6; background:rgba(255,255,255,0.03);
+  }
+  .chip strong{color:#fff;}
+  .hero-links{margin-top:40px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:0.85rem; letter-spacing:0.04em;
+    padding:13px 26px; border-radius:4px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+    border:1px solid transparent;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--orange); color:#1B0E08; font-weight:700;}
+  .btn-primary:hover{box-shadow:0 8px 20px rgba(232,116,59,0.35);}
+  .btn-ghost{border-color:rgba(255,255,255,0.25); color:#EAF1F8;}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ===== Section shell ===== */
+  section{padding:90px 6vw;}
+  .section-head{max-width:1200px; margin:0 auto 56px;}
+  .section-tag{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.25em;
+    color:var(--orange); text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .section-tag .num{color:var(--muted);}
+  .section-tag::after{content:''; flex:1; height:1px; background:var(--paper-line);}
+  h2{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(1.8rem, 4vw, 3rem);
+    letter-spacing:-0.01em; max-width:820px;
+  }
+  .section-desc{margin-top:14px; max-width:680px; color:var(--muted); font-size:1.02rem;}
+
+  .container{max-width:1200px; margin:0 auto;}
+
+  /* ===== About / Education / Skills ===== */
+  .about-grid{
+    display:grid; grid-template-columns:1.2fr 1fr; gap:60px;
+  }
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{margin-bottom:18px; color:#3A4453;}
+  .about-text strong{color:var(--ink);}
+
+  .edu-card{
+    border:1px solid var(--paper-line); border-radius:6px;
+    padding:22px 24px; margin-bottom:16px; background:#fff;
+    position:relative;
+  }
+  .edu-card::before{
+    content:''; position:absolute; left:0; top:18px; bottom:18px; width:3px;
+    background:var(--cyan); border-radius:2px;
+  }
+  .edu-card h3{font-family:var(--display); font-size:1.05rem; margin-bottom:4px;}
+  .edu-meta{font-family:var(--mono); font-size:0.78rem; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+  .edu-meta .cgpa{color:var(--orange); font-weight:700;}
+
+  .skills-block{margin-top:28px;}
+  .skills-block h4{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.15em;
+    color:var(--muted); text-transform:uppercase; margin-bottom:10px;
+  }
+  .skill-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;}
+  .tag{
+    font-family:var(--mono); font-size:0.78rem;
+    border:1px solid var(--paper-line); border-radius:4px;
+    padding:6px 12px; background:#fff; color:#3A4453;
+  }
+
+  /* ===== Featured project (Dexter) ===== */
+  .featured{background:var(--navy); color:#EAF1F8;}
+  .featured .section-tag{color:var(--cyan);}
+  .featured .section-tag::after{background:rgba(255,255,255,0.12);}
+  .featured h2{color:#fff;}
+  .featured .section-desc{color:#9FB3C8;}
+
+  .drawing-sheet{
+    border:1px solid rgba(255,255,255,0.15); border-radius:8px;
+    overflow:hidden; margin-top:48px; background:rgba(255,255,255,0.02);
+  }
+  .sheet-titleblock{
+    display:flex; flex-wrap:wrap; gap:0;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+    font-family:var(--mono); font-size:0.78rem;
+  }
+  .tb-cell{
+    padding:14px 22px; border-right:1px solid rgba(255,255,255,0.12);
+    flex:1; min-width:140px;
+  }
+  .tb-cell:last-child{border-right:none;}
+  .tb-cell .label{color:var(--cyan); letter-spacing:0.12em; text-transform:uppercase; font-size:0.68rem; margin-bottom:6px;}
+  .tb-cell .val{color:#EAF1F8; font-weight:500;}
+
+  .sheet-body{padding:48px 40px;}
+  @media (max-width:760px){ .sheet-body{padding:32px 18px;} }
+
+  .arc{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:56px;}
+  @media (max-width:860px){ .arc{grid-template-columns:1fr;} }
+  .arc-card{
+    border:1px solid rgba(255,255,255,0.12); border-radius:6px; overflow:hidden;
+  }
+  .arc-card img{width:100%; display:block; border-bottom:1px solid rgba(255,255,255,0.12);}
+  .arc-card .arc-body{padding:22px 24px;}
+  .arc-status{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; padding:4px 10px; border-radius:3px;
+    display:inline-block; margin-bottom:12px;
+  }
+  .status-fail{background:rgba(217,83,79,0.15); color:#F2A29F; border:1px solid rgba(217,83,79,0.35);}
+  .status-pass{background:rgba(95,174,110,0.15); color:#A6D9AF; border:1px solid rgba(95,174,110,0.35);}
+  .arc-card h3{font-family:var(--display); font-size:1.3rem; margin-bottom:10px;}
+  .arc-card p{color:#B9C8D8; font-size:0.94rem; margin-bottom:16px;}
+
+  .stat-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .stat{
+    font-family:var(--mono); font-size:0.78rem;
+    border:1px solid rgba(255,255,255,0.15); border-radius:4px;
+    padding:8px 12px; flex:1; min-width:120px;
+  }
+  .stat .v{display:block; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:2px;}
+  .stat .k{color:var(--muted);}
+  .stat.warn .v{color:var(--orange);}
+  .stat.ok .v{color:var(--green);}
+
+  .arrow-divider{
+    text-align:center; font-family:var(--mono); color:var(--muted);
+    font-size:0.85rem; letter-spacing:0.2em; margin:-30px 0 30px;
+    position:relative; z-index:2;
+  }
+
+  /* result tiles */
+  .result-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px; margin-top:8px;
+  }
+  .result-tile{
+    border:1px solid rgba(255,255,255,0.12); border-radius:6px; overflow:hidden;
+    background:rgba(255,255,255,0.015);
+  }
+  .result-tile img{width:100%; display:block;}
+  .result-tile .rt-body{padding:16px 18px;}
+  .result-tile h4{font-family:var(--display); font-size:1rem; margin-bottom:6px;}
+  .result-tile .rt-num{
+    font-family:var(--mono); font-size:1.4rem; font-weight:700; color:var(--cyan); margin-bottom:4px;
+  }
+  .result-tile p{color:#9FB3C8; font-size:0.85rem; margin:0;}
+
+  .conclusion-box{
+    margin-top:56px; border:1px dashed rgba(255,255,255,0.25); border-radius:6px;
+    padding:28px 30px; font-size:0.95rem; color:#C5D3E2;
+  }
+  .conclusion-box .label{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.2em; color:var(--orange);
+    text-transform:uppercase; margin-bottom:10px; display:block;
+  }
+
+  /* ===== Other projects grid ===== */
+  .proj-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:24px;
+  }
+  .proj-card{
+    border:1px solid var(--paper-line); border-radius:6px; padding:26px;
+    background:#fff; position:relative; transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .proj-card:hover{transform:translateY(-4px); box-shadow:0 12px 28px rgba(11,30,51,0.08);}
+  .proj-tag{
+    font-family:var(--mono); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--cyan); margin-bottom:14px; display:block;
+  }
+  .proj-card h3{font-family:var(--display); font-size:1.2rem; margin-bottom:10px;}
+  .proj-card p{color:var(--muted); font-size:0.92rem; margin-bottom:16px;}
+  .proj-meta{font-family:var(--mono); font-size:0.75rem; color:var(--ink); display:flex; justify-content:space-between; border-top:1px solid var(--paper-line); padding-top:14px;}
+
+  /* ===== Experience timeline ===== */
+  .exp-item{
+    display:grid; grid-template-columns:200px 1fr; gap:32px;
+    padding:32px 0; border-top:1px solid var(--paper-line);
+  }
+  .exp-item:last-child{border-bottom:1px solid var(--paper-line);}
+  @media (max-width:760px){ .exp-item{grid-template-columns:1fr; gap:10px;} }
+  .exp-date{font-family:var(--mono); font-size:0.85rem; color:var(--orange); font-weight:700;}
+  .exp-org{font-family:var(--mono); font-size:0.78rem; color:var(--muted); margin-top:6px;}
+  .exp-content h3{font-family:var(--display); font-size:1.2rem; margin-bottom:12px;}
+  .exp-content ul{padding-left:20px; color:#3A4453; font-size:0.95rem;}
+  .exp-content li{margin-bottom:8px;}
+
+  /* ===== Leadership ===== */
+  .lead-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;}
+  .lead-card{border-left:3px solid var(--orange); padding:6px 0 6px 22px;}
+  .lead-card h3{font-family:var(--display); font-size:1.1rem; margin-bottom:6px;}
+  .lead-card .lead-date{font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-bottom:8px;}
+  .lead-card p{color:var(--muted); font-size:0.92rem;}
+
+  /* ===== Certifications ===== */
+  .cert-list{display:flex; flex-direction:column; gap:0;}
+  .cert-item{
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    padding:20px 0; border-bottom:1px solid var(--paper-line);
+    flex-wrap:wrap;
+  }
+  .cert-item h3{font-family:var(--display); font-size:1.05rem; font-weight:600;}
+  .cert-item .cert-org{font-family:var(--mono); font-size:0.8rem; color:var(--muted); margin-top:4px;}
+  .cert-status{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+    border:1px solid var(--paper-line); border-radius:999px; padding:6px 16px; color:var(--muted);
+    white-space:nowrap;
+  }
+  .cert-status.have{border-color:var(--green); color:var(--green);}
+  .cert-status.pending{border-color:var(--orange); color:var(--orange);}
+
+  /* ===== Footer / contact ===== */
+  footer{
+    background:var(--navy); color:#EAF1F8; padding:80px 6vw 40px;
+    border-top:6px solid var(--orange);
+  }
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; max-width:1200px; margin:0 auto;}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr;} }
+  footer h2{color:#fff; margin-bottom:14px;}
+  footer p{color:#9FB3C8; max-width:420px; margin-bottom:20px;}
+  .footer-col h4{
+    font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--cyan); margin-bottom:16px;
+  }
+  .footer-col a{display:block; color:#CBD8E6; text-decoration:none; margin-bottom:10px; font-size:0.95rem;}
+  .footer-col a:hover{color:var(--orange);}
+  .footer-bottom{
+    max-width:1200px; margin:60px auto 0; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1);
+    font-family:var(--mono); font-size:0.75rem; color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* placeholder image style */
+  .placeholder{
+    aspect-ratio:16/10; display:flex; align-items:center; justify-content:center;
+    background:repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.06) 10px, rgba(255,255,255,0.06) 20px);
+    color:var(--muted); font-family:var(--mono); font-size:0.78rem; text-align:center; padding:20px;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .placeholder.light{
+    background:repeating-linear-gradient(45deg, #f6f4ee, #f6f4ee 10px, #ece7d9 10px, #ece7d9 20px);
+    color:var(--muted); border:1px solid var(--paper-line); border-radius:6px; aspect-ratio:16/10;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark"><span class="dot"></span>BATHRA GALISH S</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#dexter">Dexter Project</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Mechanical Engineering · HVAC &amp; Thermal Systems · CAD / FEA</div>
+    <h1 class="name">Bathra Galish<span class="last"> S</span></h1>
+    <p class="hero-sub">
+      Mechanical engineering student building toward HVAC design, mechatronics, and structural simulation —
+      from duct layouts on live commercial sites to iterative FEA-driven robotic arm design.
+    </p>
+    <div class="hero-meta">
+      <span class="chip"><strong>CGPA</strong> 8.50 / 10</span>
+      <span class="chip">Government College of Technology, Coimbatore</span>
+      <span class="chip">Coimbatore, TN</span>
+      <span class="chip">President, GCT ISHRAE Chapter</span>
+    </div>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="#dexter">View Featured Project →</a>
+      <a class="btn btn-ghost" href="resume.pdf" target="_blank">Download Resume (PDF)</a>
+      <a class="btn btn-ghost" href="mailto:bathragalish8056@gmail.com">Email Me</a>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="grid-bg">
+  <div class="section-head">
+    <div class="section-tag"><span class="num">01</span> About</div>
+    <h2>Grounded in HVAC fieldwork, growing into mechatronics &amp; simulation.</h2>
+  </div>
+  <div class="container about-grid">
+    <div class="about-text">
+      <p>
+        I'm a mechanical engineering undergraduate at <strong>Government College of Technology, Coimbatore</strong>,
+        currently in my 6th semester with a CGPA of <strong>8.50</strong>. My work sits at the intersection of
+        <strong>HVAC system design</strong>, <strong>BIM/MEP coordination</strong>, and <strong>CAD-driven structural simulation</strong>.
+      </p>
+      <p>
+        On the field side, I've designed duct layouts and run heat load calculations for real commercial installations —
+        including leading the complete duct system for a restaurant project from sizing through fabrication and
+        site commissioning. On the digital side, I've completed government-sponsored BIM training, building full
+        MEP models in Revit, and I run iterative CAD/FEA design cycles in Fusion 360 and ANSYS.
+      </p>
+      <p>
+        I lead the <strong>ISHRAE student chapter</strong> at GCT, organising technical seminars and industry
+        sessions on HVAC and thermal engineering.
+      </p>
+
+      <div class="skills-block">
+        <h4>CAD &amp; Design</h4>
+        <div class="skill-tags">
+          <span class="tag">Creo Parametric</span>
+          <span class="tag">Fusion 360</span>
+          <span class="tag">AutoCAD</span>
+        </div>
+        <h4>Simulation &amp; FEA</h4>
+        <div class="skill-tags">
+          <span class="tag">ANSYS Mechanical APDL</span>
+          <span class="tag">Fusion 360 Simulation</span>
+        </div>
+        <h4>BIM &amp; MEP</h4>
+        <div class="skill-tags">
+          <span class="tag">Revit MEP — HVAC</span>
+          <span class="tag">Electrical &amp; Plumbing Modelling</span>
+          <span class="tag">Heat Load Calculation</span>
+          <span class="tag">Clash Detection</span>
+        </div>
+        <h4>Fabrication</h4>
+        <div class="skill-tags">
+          <span class="tag">HVAC Duct Fabrication &amp; Installation</span>
+          <span class="tag">Sheet Metal Work</span>
+          <span class="tag">3D Printing (Cura)</span>
+        </div>
+        <h4>Soft Skills</h4>
+        <div class="skill-tags">
+          <span class="tag">Technical Presentations</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Site Coordination</span>
+          <span class="tag">Research &amp; Lit. Review</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-side">
+      <div class="edu-card">
+        <h3>Bachelor of Engineering — Mechanical Engineering</h3>
+        <div class="edu-meta">
+          <span>Government College of Technology, Coimbatore</span>
+          <span>2023 – 2027</span>
+        </div>
+        <div class="edu-meta" style="margin-top:8px;">
+          <span class="cgpa">CGPA 8.50</span>
+          <span>up to 6th semester</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <h3>Higher Secondary (Class XII)</h3>
+        <div class="edu-meta">
+          <span>DVD Higher Secondary School, Nagercoil</span>
+          <span>2022 – 2023</span>
+        </div>
+        <div class="edu-meta" style="margin-top:8px;">
+          <span class="cgpa">86%</span>
+        </div>
+      </div>
+
+      <div class="edu-card" style="border-left-color:var(--orange);">
+        <h3>Quick facts</h3>
+        <p style="font-size:0.9rem;color:var(--muted);margin-top:10px;">
+          540 CFM exhaust fan sized and selected for a real restaurant HVAC install ·
+          15+ research papers reviewed on phase change materials ·
+          4 on-site field projects completed during internship ·
+          213× buckling safety margin achieved on final robotic arm design.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECT: DEXTER -->
+<section id="dexter" class="featured">
+  <div class="section-head">
+    <div class="section-tag"><span class="num">02</span> Featured Project</div>
+    <h2>Dexter — Robotic Arm Design, Failure Analysis &amp; Redesign</h2>
+    <p class="section-desc">
+      A complete design–simulate–redesign cycle in Autodesk Fusion 360: a first-pass arm failed its
+      safety target at the gripper, was root-caused, and rebuilt as a 4-DOF arm with cycloidal gear
+      drives — then validated under static, modal, and buckling analysis.
+    </p>
+  </div>
+
+  <div class="container">
+    <div class="drawing-sheet">
+      <div class="sheet-titleblock">
+        <div class="tb-cell"><div class="label">Project</div><div class="val">Robotic Arm + Gripper</div></div>
+        <div class="tb-cell"><div class="label">Software</div><div class="val">Autodesk Fusion 360</div></div>
+        <div class="tb-cell"><div class="label">Material</div><div class="val">Aluminium Alloy</div></div>
+        <div class="tb-cell"><div class="label">Design Cycles</div><div class="val">2 (V1 → Dexter)</div></div>
+        <div class="tb-cell"><div class="label">Studies Run</div><div class="val">Static · Modal · Buckling</div></div>
+      </div>
+
+      <div class="sheet-body">
+        <!-- The arc: V1 vs Dexter -->
+        <div class="arc">
+          <div class="arc-card">
+            <img src="images/hero_v1_setup.png" alt="Version 1 robotic arm static stress study setup in Fusion 360">
+            <div class="arc-body">
+              <span class="arc-status status-fail">Phase 1 — Not strong enough</span>
+              <h3>Version 1: Initial Prototype</h3>
+              <p>
+                A simplified arm with a spur-gear gripper, evaluated under a 50&nbsp;N gripper load plus
+                gravity. The simulation flagged the gripper support as structurally inadequate.
+              </p>
+              <div class="stat-row">
+                <div class="stat warn"><span class="v">1.585</span><span class="k">Min Safety Factor (target 2.0)</span></div>
+                <div class="stat"><span class="v">130.6 MPa</span><span class="k">Max Von Mises Stress</span></div>
+                <div class="stat"><span class="v">0.264 mm</span><span class="k">Max Displacement</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arc-card">
+            <img src="images/dexter_assembly.png" alt="Dexter complete assembly in Fusion 360 with cycloidal gear joints">
+            <div class="arc-body">
+              <span class="arc-status status-pass">Phase 2 — Redesigned &amp; validated</span>
+              <h3>Dexter: 4-DOF Redesign</h3>
+              <p>
+                Fully articulated 4-DOF arm with cycloidal gear drives at every joint and a purpose-built
+                gear-driven parallel gripper, validated against three independent simulation studies.
+              </p>
+              <div class="stat-row">
+                <div class="stat warn"><span class="v">1.481</span><span class="k">Min Safety Factor (target 2.0)</span></div>
+                <div class="stat"><span class="v">158.9 MPa</span><span class="k">Max Von Mises (57.8% of yield)</span></div>
+                <div class="stat ok"><span class="v">213×</span><span class="k">Buckling Load Multiplier</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family:var(--display); font-size:1.4rem; margin-bottom:18px;">Why Version 1 failed</h3>
+        <p style="color:#B9C8D8; max-width:760px; margin-bottom:36px; font-size:0.96rem;">
+          The critical region was the junction between the forearm link and the spur-gear gripper support —
+          a cantilevered point where all grasping forces concentrated as bending moments, with thin
+          engagement zones causing high local contact pressure (25.97&nbsp;MPa) and a base reaction force
+          of 51.09&nbsp;N from just a 50&nbsp;N applied load. Rather than patch the frame, the arm was rebuilt
+          from the ground up as <strong style="color:#fff;">Dexter</strong>: cycloidal gear drives for better
+          load distribution, a wider gripper finger base, and an increased base wall thickness for moment
+          resistance.
+        </p>
+
+        <h3 style="font-family:var(--display); font-size:1.4rem; margin-bottom:6px;">Dexter — simulation results</h3>
+        <p style="color:#9FB3C8; font-size:0.92rem; margin-bottom:24px;">Three studies run on the final 4-DOF assembly, Aluminium Alloy (yield strength 275 MPa).</p>
+
+        <div class="result-grid">
+          <div class="result-tile">
+            <img src="images/dexter_safetyfactor.png" alt="Dexter safety factor result, minimum 1.481 at lower arm joint">
+            <div class="rt-body">
+              <h4>Static Stress — Safety Factor</h4>
+              <div class="rt-num">1.481</div>
+              <p>Minimum at the lower arm joint, vs 8+ everywhere else on the assembly. Below the 2.0 target but stable for lightweight operation.</p>
+            </div>
+          </div>
+          <div class="result-tile">
+            <img src="images/dexter_vonmises.png" alt="Dexter Von Mises stress result, maximum 158.882 MPa">
+            <div class="rt-body">
+              <h4>Von Mises Stress</h4>
+              <div class="rt-num">158.882 MPa</div>
+              <p>Localised at the lower-arm joint — about 42% stress margin remaining against the 275 MPa yield strength of Aluminium Alloy.</p>
+            </div>
+          </div>
+          <div class="result-tile">
+            <img src="images/dexter_displacement.png" alt="Dexter total displacement result, maximum 0.482 mm at gripper">
+            <div class="rt-body">
+              <h4>Total Displacement</h4>
+              <div class="rt-num">0.482 mm</div>
+              <p>At the gripper end-effector, on a ~320 mm reach arm — a tip deflection ratio of roughly 0.15%.</p>
+            </div>
+          </div>
+          <div class="result-tile">
+            <img src="images/dexter_modal.png" alt="Dexter modal frequency analysis, mode 1 at 48.738 Hz">
+            <div class="rt-body">
+              <h4>Modal Frequency — Mode 1</h4>
+              <div class="rt-num">48.738 Hz</div>
+              <p>Well above the typical 1–20 Hz servo actuation range, confirming the arm avoids resonance during normal operation.</p>
+            </div>
+          </div>
+          <div class="result-tile">
+            <img src="images/dexter_buckling.png" alt="Dexter structural buckling analysis, mode 1 buckling load multiplier 213">
+            <div class="rt-body">
+              <h4>Structural Buckling</h4>
+              <div class="rt-num">213×</div>
+              <p>Buckling load multiplier on Mode 1 — the arm can theoretically take 213× the applied compressive load before collapse.</p>
+            </div>
+          </div>
+          <div class="result-tile">
+            <img src="images/dexter_gripper.png" alt="Dexter Full Hand v1 gear-driven parallel gripper render">
+            <div class="rt-body">
+              <h4>End Effector — Full Hand v1</h4>
+              <div class="rt-num">70 mm</div>
+              <p>Maximum gripping width on a spur-gear + linkage parallel gripper, designed for synchronised finger closure.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+          <span class="label">Outcome</span>
+          This project demonstrated a complete engineering design–simulate–redesign workflow: a baseline
+          prototype was found structurally inadequate, root-caused to its gripper geometry, and rebuilt as
+          a validated 4-DOF arm with documented static, modal, and buckling performance — forming a
+          foundation for future motor integration, control system design, and physical prototyping.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER PROJECTS -->
+<section id="projects" class="grid-bg">
+  <div class="section-head">
+    <div class="section-tag"><span class="num">03</span> Other Projects</div>
+    <h2>HVAC, controls, and applied mechatronics across six semesters.</h2>
+  </div>
+  <div class="container proj-grid">
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 6 · HVAC + Controls</span>
+      <h3>Smart HVAC Multi-Zone Control System</h3>
+      <p>
+        A multi-zone HVAC concept where each room runs an independent DHT11 sensor and PWM-driven blower fan,
+        proportionally controlled around a 24°C setpoint — a simplified, low-cost prototype of a Variable Air
+        Volume (VAV) system, replacing dampers with variable fan speed.
+      </p>
+      <div class="proj-meta"><span>Tools: Arduino/ESP32, DHT11, PWM</span><span>2025–26</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 6 · Revit MEP</span>
+      <h3>Variable Fan Speed Control with Temperature Sensor</h3>
+      <p>
+        Designed and programmed a complete variable fan control system that adjusts fan speed in real time
+        based on temperature sensor feedback, with the full system layout modelled in Revit MEP.
+      </p>
+      <div class="proj-meta"><span>Tools: Revit MEP, Sensors</span><span>2025–26</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 6 · Literature Review</span>
+      <h3>Phase Change Materials for Thermal Energy Storage</h3>
+      <p>
+        In-depth review of 15+ research papers on solid–liquid PCM transitions and latent heat storage,
+        synthesising findings on organic, inorganic, and eutectic PCMs for building energy efficiency and HVAC.
+      </p>
+      <div class="proj-meta"><span>Independent study</span><span>2025</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 4 · HVAC Field Project</span>
+      <h3>Aryabhavan Restaurant — HVAC Duct Design &amp; Install</h3>
+      <p>
+        Led an end-to-end commercial duct project: sizing from 6"×4" to 12"×10", grille placement, a 540 CFM
+        exhaust fan selection, and cut openings — all in AutoCAD, followed by sheet metal fabrication and
+        ceiling-mounted installation.
+      </p>
+      <div class="proj-meta"><span>Tools: AutoCAD</span><span>Sky Breeze AC Solutions</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 5 · BIM / MEP</span>
+      <h3>BIM-Based MEP Building Plan</h3>
+      <p>
+        A complete multi-discipline MEP model of a commercial building — HVAC ducts, electrical systems, and
+        plumbing layouts coordinated in Revit MEP, with clash detection and extracted drawing schedules.
+      </p>
+      <div class="proj-meta"><span>Tools: Revit MEP</span><span>Dec 2024</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 3 · Mini Project</span>
+      <h3>Filter Dust Sensor Detection System</h3>
+      <p>
+        A sensor-based system to detect clogged or dirty filters in HVAC ducts and split AC units, with an
+        alert mechanism prompting timely cleaning or replacement — built with a team of four.
+      </p>
+      <div class="proj-meta"><span>Team of 4</span><span>2024</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Sem 2 · Academic Project</span>
+      <h3>Occupancy Sensor System for Local Buses</h3>
+      <p>
+        Conceptualised sensor placement, signal flow, and a real-time data reporting mechanism to monitor
+        passenger load on local buses, aimed at improving crowd management and transport efficiency.
+      </p>
+      <div class="proj-meta"><span>Academic project</span><span>2023</span></div>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-tag">Design Thinking · Ideation</span>
+      <h3>SCAMPER-Based Heavy Lift Mechanism</h3>
+      <p>
+        Applied the SCAMPER ideation framework to design an electrically-actuated lifting mechanism (adapting
+        a scissor-lift principle) for installation work — including material selection of mild steel based on
+        yield strength, weldability, and cost.
+      </p>
+      <div class="proj-meta"><span>Method: SCAMPER</span><span>Case study</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-head">
+    <div class="section-tag"><span class="num">04</span> Experience</div>
+    <h2>Hands-on with HVAC installation and BIM coordination.</h2>
+  </div>
+  <div class="container">
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-date">Jul – Aug 2025</div>
+        <div class="exp-org">Sky Breeze AC Solutions, Coimbatore</div>
+      </div>
+      <div class="exp-content">
+        <h3>Project Intern — HVAC Design &amp; Installation</h3>
+        <ul>
+          <li>Designed duct layouts and performed heat load calculations for residential and commercial HVAC systems.</li>
+          <li>Took part in the full project lifecycle — duct fabrication (sheet metal cutting, bending, joint prep), installation, testing, and commissioning across 4 on-site field projects.</li>
+          <li>Designed and oversaw the complete HVAC duct system for Aryabhavan Restaurant, Mettupalayam, including duct sizing, FAD/grille placement, and exhaust fan layout in AutoCAD.</li>
+          <li>Assisted on 2 additional commercial installations, reviewing engineering drawings during manufacturing and site phases.</li>
+          <li>Built a practical understanding of site coordination, safety practices, and real-time problem solving.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-date">Dec 2024 – Jan 2025</div>
+        <div class="exp-org">MSME Technology Development Centre (PPDC), Coimbatore</div>
+      </div>
+      <div class="exp-content">
+        <h3>Training Intern — Revit MEP / BIM (5th Semester)</h3>
+        <ul>
+          <li>Completed a 10-week government-sponsored BIM training, building a complete MEP model integrating HVAC, electrical, and plumbing systems in Revit MEP.</li>
+          <li>Performed duct routing, AHU placement, supply/return air system design, and heat load calculations within Revit MEP.</li>
+          <li>Developed electrical and plumbing layouts, practising clash detection and inter-disciplinary coordination.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="grid-bg">
+  <div class="section-head">
+    <div class="section-tag"><span class="num">05</span> Leadership</div>
+    <h2>Building community around thermal engineering.</h2>
+  </div>
+  <div class="container lead-grid">
+    <div class="lead-card">
+      <h3>President — GCT ISHRAE Student Chapter</h3>
+      <div class="lead-date">2025 – 2026</div>
+      <p>Lead the ISHRAE student chapter, organising technical seminars, industry interaction sessions, and knowledge-sharing events on HVAC and thermal engineering topics.</p>
+    </div>
+    <div class="lead-card">
+      <h3>Member — Rotaract GCT Club</h3>
+      <div class="lead-date">2024 – 2025</div>
+      <p>Participated in community outreach and team-building activities.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-head">
+    <div class="section-tag"><span class="num">06</span> Certifications &amp; Training</div>
+    <h2>Verified training credentials.</h2>
+    <p class="section-desc">Certificate files to be added — placeholders shown below will link to scanned copies once uploaded.</p>
+  </div>
+  <div class="container cert-list">
+    <div class="cert-item">
+      <div>
+        <h3>Revit MEP / BIM Training</h3>
+        <div class="cert-org">MSME Technology Development Centre (PPDC), Coimbatore — 2024–25</div>
+      </div>
+      <span class="cert-status pending">Awaiting file</span>
+    </div>
+    <div class="cert-item">
+      <div>
+        <h3>HVAC System Design &amp; Installation</h3>
+        <div class="cert-org">Sky Breeze AC Solutions, Coimbatore — 2025</div>
+      </div>
+      <span class="cert-status pending">Awaiting file</span>
+    </div>
+    <div class="cert-item">
+      <div>
+        <h3>Public Speaking for Non-Native English Speakers</h3>
+        <div class="cert-org">Certified</div>
+      </div>
+      <span class="cert-status pending">Awaiting file</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <h2 style="font-family:var(--display); font-size:2rem;">Let's build something.</h2>
+      <p>
+        Open to internships and project collaborations in HVAC design, mechatronics, and structural simulation.
+        Reach out by email or connect on LinkedIn.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="mailto:bathragalish8056@gmail.com">bathragalish8056@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:bathragalish8056@gmail.com">Email</a>
+      <a href="tel:8015301224">+91 80153 01224</a>
+      <a href="https://linkedin.com/in/bathra-galish" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-col">
+      <h4>Site</h4>
+      <a href="#about">About</a>
+      <a href="#dexter">Dexter Project</a>
+      <a href="#projects">Other Projects</a>
+      <a href="#experience">Experience</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>BATHRA GALISH S — MECHANICAL ENGINEERING PORTFOLIO</span>
+    <span>COIMBATORE, TAMIL NADU</span>
+  </div>
+</footer>
+
+</body>
+</html>
