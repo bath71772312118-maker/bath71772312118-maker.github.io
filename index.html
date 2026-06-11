@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bathra Galish | Mechanical Engineer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    line-height:1.6;
+}
+
+header{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+.hero h1{
+    font-size:4rem;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:1.2rem;
+    color:#cbd5e1;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 25px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+.section-title{
+    font-size:2rem;
+    margin-bottom:30px;
+    color:#60a5fa;
+}
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
+}
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.skill{
+    background:#1e293b;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+.project{
+    background:#1e293b;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.project img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.project-content{
+    padding:20px;
+}
+
+.project-content h3{
+    margin-bottom:10px;
+}
+
+.project-content ul{
+    margin-left:20px;
+}
+
+.contact{
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#020617;
+    color:#94a3b8;
+}
+
+@media(max-width:768px){
+
+.about{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:2.5rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="hero">
+
+<h1>Bathra Galish S</h1>
+
+<p>
+Mechanical Engineering Student <br>
+HVAC • CAD • FEA • Robotics • BIM/MEP
+</p>
+
+<a href="#projects" class="btn">View Projects</a>
+
+</div>
+
+</header>
+
+<section>
+
+<h2 class="section-title">About Me</h2>
+
+<div class="about">
+
+<div class="card">
+<h3>Profile</h3>
+<p>
+Mechanical Engineering student with practical experience in HVAC design,
+Revit MEP, CAD modelling, finite element analysis and robotics.
+Passionate about product design, automation and thermal systems.
+</p>
+</div>
+
+<div class="card">
+<h3>Education</h3>
+<p>
+B.E Mechanical Engineering<br>
+Government College of Technology, Coimbatore
+</p>
+
+<br>
+
+<p>
+CGPA: 8.50
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Technical Skills</h2>
+
+<div class="skills">
+
+<div class="skill">Fusion 360</div>
+<div class="skill">Creo Parametric</div>
+<div class="skill">AutoCAD</div>
+<div class="skill">Revit MEP</div>
+<div class="skill">ANSYS</div>
+<div class="skill">HVAC Design</div>
+<div class="skill">Heat Load Calculation</div>
+<div class="skill">FEA</div>
+
+</div>
+
+</section>
+
+<section id="projects">
+
+<h2 class="section-title">Projects</h2>
+
+<div class="projects">
+
+<div class="project">
+
+<img src="https://images.unsplash.com/photo-1561144257-e32e8efc6c4f">
+
+<div class="project-content">
+
+<h3>DEXTER Robotic Arm</h3>
+
+<p>
+Designed and simulated a robotic arm using Fusion 360.
+</p>
+
+<ul>
+<li>Max Stress: 158.88 MPa</li>
+<li>Displacement: 0.482 mm</li>
+<li>Safety Factor: 1.481</li>
+<li>Modal Analysis</li>
+<li>Buckling Analysis</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789">
+
+<div class="project-content">
+
+<h3>Smart HVAC Multi-Zone Control</h3>
+
+<p>
+HVAC automation system using sensors and PWM-based fan control.
+</p>
+
+<ul>
+<li>DHT11 Sensors</li>
+<li>Arduino / ESP32</li>
+<li>PWM Control</li>
+<li>VAV Concept</li>
+<li>Revit MEP Integration</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="project">
+
+<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952">
+
+<div class="project-content">
+
+<h3>HVAC Installation Lift Mechanism</h3>
+
+<p>
+Scissor-lift based solution for evaporator and duct installation.
+</p>
+
+<ul>
+<li>Rack & Pinion Drive</li>
+<li>Force Analysis</li>
+<li>Material Selection</li>
+<li>Platform Design</li>
+<li>Mechanical Optimization</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Leadership</h2>
+
+<div class="card">
+
+<h3>President – ISHRAE Student Chapter</h3>
+
+<p>
+Leading technical activities, workshops, and student engagement
+programs focused on HVAC and Mechanical Engineering.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Contact</h2>
+
+<div class="contact">
+
+<p><strong>Email:</strong> bathragalish8056@gmail.com</p>
+
+<p><strong>Phone:</strong> 8015301224</p>
+
+<p><strong>Location:</strong> Coimbatore, Tamil Nadu</p>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 Bathra Galish S | Engineering Portfolio
+
+</footer>
+
+</body>
+</html>
